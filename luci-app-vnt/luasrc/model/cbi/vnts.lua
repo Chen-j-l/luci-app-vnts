@@ -9,8 +9,7 @@ m:section(SimpleSection).template  = "vnts/vnts_status"
 s = m:section(TypedSection, "vnts", translate("vnts服务器设置"))
 s.anonymous = true
 
-s:tab("gen", translate("基本设置"))
-s:tab("pri", translate("高级设置"))
+s:tab("gen", translate("参数设置"))
 
 switch = s:taboption("gen", Flag, "enabled", translate("Enable"))
 switch.rmempty = false
@@ -57,30 +56,8 @@ logs = s:taboption("gen",Flag, "logs", translate("启用日志"),
 	translate("运行日志在/tmp/vnts.log，可在上方服务端日志查看"))
 logs.rmempty = false
 
-sfinger = s:taboption("pri",Flag, "sfinger", translate("启用数据指纹校验"),
+sfinger = s:taboption("gen",Flag, "sfinger", translate("启用数据指纹校验"),
 	translate("开启后只会转发指纹正确的客户端数据包，增强安全性，这会损失一部分性能,如果服务端开启指纹校验，则客户端也必须开启。<br>注意：默认情况下服务端不会对中转的数据做校验，如果要对中转的数据做校验，则需要客户端、服务端都开启此参数"))
 sfinger.rmempty = false
-
-public_key = s:taboption("pri",TextValue, "public_key", translate("public公钥"),
-	translate("服务端密钥在程序同目录/key里,可以替换成自定义的密钥对<br>修改服务端密钥后，客户端要重启才能正常链接(修改密钥后无法自动重连)"))
-public_key.rows = 3
-public_key.wrap = "off"
-public_key.cfgvalue = function(self, section)
-    return nixio.fs.readfile("/tmp/vnts_key/public_key.pem") or ""
-end
-public_key.write = function(self, section, value)
-    nixio.fs.writefile("/tmp/vnts_key/public_key.pem", value:gsub("\r\n", "\n"))
-end
-
-private_key = s:taboption("pri",TextValue, "private_key", translate("private私钥"),
-	translate("服务端密钥在程序同目录/key里,可以替换成自定义的密钥对<br>修改服务端密钥后，客户端要重启才能正常链接(修改密钥后无法自动重连)<br>服务端密钥用于加密客户端和服务端之间传输的数据(使用rsa+aes256gcm加密)<br>可以防止token被中间人窃取，如果客户端显示的密钥指纹和服务端的不一致，<br>则表示可能有中间人攻击"))
-private_key.rows = 3
-private_key.wrap = "off"
-private_key.cfgvalue = function(self, section)
-    return nixio.fs.readfile("/tmp/vnts_key/private_key.pem") or ""
-end
-private_key.write = function(self, section, value)
-    nixio.fs.writefile("/tmp/vnts_key/private_key.pem", value:gsub("\r\n", "\n"))
-end
 
 return m
