@@ -1,0 +1,7 @@
+config vnts
+	option enabled '0'
+	option server_port '29872'
+	option subnet '10.26.0.1'
+        option logs '1'
+        option web '0'
+        option sfinger '0'

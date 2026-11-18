@@ -42,7 +42,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/$(PKG_NAME)
 	SECTION:=net
 	CATEGORY:=Network
-	TITLE:=An efficient VPN 
+	TITLE:=VNT Server
 	DEPENDS:=@(i386||x86_64||arm||aarch64||mipsel||mips)
 	URL:=https://github.com/vnt-dev/vnts
 endef
