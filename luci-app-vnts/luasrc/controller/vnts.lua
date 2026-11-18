@@ -1,5 +1,5 @@
 
-module("luci.controller.vnt", package.seeall)
+module("luci.controller.vnts", package.seeall)
 
 function index()
 	if not nixio.fs.access("/etc/config/vnts") then
@@ -8,7 +8,7 @@ function index()
 	
 	entry({"admin", "vpn", "vnts"}, alias("admin", "vpn", "vnts", "vnts"),_("VNTS"), 44).dependent = true
 	entry({"admin", "vpn", "vnts", "vnts"}, cbi("vnts"),_("VNTS"), 45).leaf = true
-	entry({"admin", "vpn", "vnts", "log"}, form("log"),_("日志"), 46).leaf = true
+	entry({"admin", "vpn", "vnts", "log"}, form("vnts_log"),_("日志"), 46).leaf = true
 	entry({"admin", "vpn", "vnts", "get_log"}, call("get_log")).leaf = true
 	entry({"admin", "vpn", "vnts", "clear_log"}, call("clear_log")).leaf = true
 	entry({"admin", "vpn", "vnts", "status"}, call("act_status")).leaf = true
