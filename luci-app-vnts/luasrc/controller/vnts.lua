@@ -41,10 +41,6 @@ function act_status()
 	local command2 = io.popen("test ! -z `pidof vnts` && (cat /proc/$(pidof vnts | awk '{print $NF}')/status | grep -w VmRSS | awk '{printf \"%.2f MB\", $2/1024}')")
 	e.vntsRam = command2:read("*all")
 	command2:close()
-	local command3 = io.popen("([ -s /tmp/vnts.tag ] && cat /tmp/vnts.tag ) || ( echo `$(uci -q get vnt.@vnts[0].vntsbin) -V | awk -F 'version: ' '{print $2}'` > /tmp/vnts.tag && cat /tmp/vnts.tag && [ ! -s /tmp/vnts.tag ] && echo '？' >> /tmp/vnts.tag && cat /tmp/vnts.tag )")
-	e.vntsTag = command3:read("*all")
-	command3:close()
-
 	luci.http.prepare_content("application/json")
 	luci.http.write_json(e)
 end

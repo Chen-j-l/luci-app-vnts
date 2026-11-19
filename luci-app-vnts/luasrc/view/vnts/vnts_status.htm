@@ -4,26 +4,25 @@
 %>
 <script type="text/javascript">//<![CDATA[
 XHR.poll(3, '<%=url([[admin]], [[vpn]], [[vnts]], [[status]])%>', null,
-    function(x, data) {
-        var st = document.getElementById('vnts_status');
-        if (data && st) {
-            var vntsStatus = data.running ? "<span style='color:green;'> 运行中</span>" : "<span style='color:red;'> 未运行</span>";
-            var vntsStaContent = data.running ? "&nbsp;&nbsp;&nbsp;&nbsp;" + "&nbsp;&nbsp;已&nbsp;运&nbsp;行&nbsp;：" + "<span style='color:#DA70D6;'>" + data.vntsSta + "</span>" : "";    
-            var vntsCpuContent = data.running ? "<br>" + "CPU占用：" + "<span style='color:#6A5ACD;'>" + data.vntsCpu + "</span>" : "";  
-            var vntsRamContent = data.running ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "&nbsp;&nbsp;&nbsp;内存占用：" + "<span style='color:#0000CD;'>" + data.vntsRam + "</span>" : "";
-            var vntsTagContent = data.running ? "<br>" + "当前版本：" + "<span style='color:#CD853F;'>" + data.vntsTag + "</span>" : "";  
-            var vntswebContent = "";
-            if (data.web !== 0 && data.running) {
-                vntswebContent = "&nbsp;&nbsp;&nbsp;" + "<input class=\"cbi-button cbi-button-reload mar-10\" type=\"button\" value=\" <%:Web 界面%> \" onclick=\"window.open('<%=protocol%>" + window.location.hostname + ":" + data.port + "/')\"/>";
-            }
-            st.innerHTML = "<em><b>vnts " + vntsStatus + vntsStaContent + vntsCpuContent + vntsRamContent + vntsTagContent + vntswebContent + "</b></em>"; 
-        }
-    }
+	function(x, data) {
+		var st = document.getElementById('vnts_status');
+		if (data && st) {
+			var vntsStatus = data.running ? "<span style='color:green;'> 运行中</span>" : "<span style='color:red;'> 未运行</span>";
+			var vntsStaContent = data.running ? "&nbsp;&nbsp;&nbsp;&nbsp;" + "&nbsp;&nbsp;已&nbsp;运&nbsp;行&nbsp;：" + "<span style='color:#DA70D6;'>" + data.vntsSta + "</span>" : "";    
+			var vntsCpuContent = data.running ? "<br>" + "CPU占用：" + "<span style='color:#6A5ACD;'>" + data.vntsCpu + "</span>" : "";  
+			var vntsRamContent = data.running ? "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "&nbsp;&nbsp;&nbsp;内存占用：" + "<span style='color:#0000CD;'>" + data.vntsRam + "</span>" : "";
+			var vntswebContent = "";
+			if (data.web !== 0 && data.running) {
+				vntswebContent = "&nbsp;&nbsp;&nbsp;" + "<input class=\"cbi-button cbi-button-reload mar-10\" type=\"button\" value=\" <%:Web 界面%> \" onclick=\"window.open('<%=protocol%>" + window.location.hostname + ":" + data.port + "/')\"/>";
+			}
+			st.innerHTML = "<em><b>vnts " + vntsStatus + vntsStaContent + vntsCpuContent + vntsRamContent + vntswebContent + "</b></em>"; 
+		}
+	}
 );
 //]]>
 </script>
 <fieldset class="cbi-section">
-    <p id="vnts_status">
-        <em><%:Collecting data...%></em>
-    </p>
+	<p id="vnts_status">
+		<em><%:Collecting data...%></em>
+	</p>
 </fieldset>
