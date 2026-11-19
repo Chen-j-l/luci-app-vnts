@@ -15,10 +15,6 @@ LUCI_PKGARCH:=all
 
 PKG_NAME:=luci-app-vnts
 
-define Package/$(PKG_NAME)/install
-	$(INSTALL_DIR) $(1)/etc/vnts
-endef
-
 define Package/$(PKG_NAME)/conffiles
 /etc/config/vnts
 endef

@@ -10,6 +10,7 @@ s = m:section(TypedSection, "vnts", translate("vnts服务器设置"))
 s.anonymous = true
 
 s:tab("gen", translate("参数设置"))
+s:tab("logs", translate("日志"))
 
 switch = s:taboption("gen", Flag, "enabled", translate("Enable"))
 switch.rmempty = false
@@ -59,5 +60,9 @@ logs.rmempty = false
 sfinger = s:taboption("gen",Flag, "sfinger", translate("启用数据指纹校验"),
 	translate("开启后只会转发指纹正确的客户端数据包，增强安全性，这会损失一部分性能,如果服务端开启指纹校验，则客户端也必须开启。<br>注意：默认情况下服务端不会对中转的数据做校验，如果要对中转的数据做校验，则需要客户端、服务端都开启此参数"))
 sfinger.rmempty = false
+
+logs = s:taboption("logs", DummyValue, "logs")
+logs.rawhtml = true
+logs.template = "vnts/vnts_log"
 
 return m

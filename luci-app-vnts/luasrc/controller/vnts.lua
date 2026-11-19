@@ -8,7 +8,6 @@ function index()
 	
 	entry({"admin", "vpn", "vnts"}, alias("admin", "vpn", "vnts", "vnts"),_("VNTS"), 44).dependent = true
 	entry({"admin", "vpn", "vnts", "vnts"}, cbi("vnts"),_("VNTS"), 45).leaf = true
-	entry({"admin", "vpn", "vnts", "log"}, form("vnts_log"),_("日志"), 46).leaf = true
 	entry({"admin", "vpn", "vnts", "get_log"}, call("get_log")).leaf = true
 	entry({"admin", "vpn", "vnts", "clear_log"}, call("clear_log")).leaf = true
 	entry({"admin", "vpn", "vnts", "status"}, call("act_status")).leaf = true
@@ -62,5 +61,5 @@ function get_log()
 end
 
 function clear_log()
-	luci.sys.call("rm -rf /tmp/vnts*.log")
+	luci.sys.call("rm -rf /tmp/vnts.log")
 end
